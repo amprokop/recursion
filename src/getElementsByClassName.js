@@ -1,9 +1,57 @@
-// If life was easy, we could just do things the easy way:
-// var getElementsByClassName = function (className) {
-//   return document.getElementsByClassName(className);
-// };
+var getElementsByClassName = function(className){
 
-// But in stead we're going to implement it from scratch:
-var getElementsByClassName = function (className) {
-  // your code here
-};
+  var output = [];
+  var nodes = [document.body];
+
+  var walkDown = function(nodeList, func){
+    for (var i = 0; i < nodeList.length; i++){
+      if (nodeList[i].nodeType === 1){
+        func(nodeList[i]);
+      };
+
+      if (nodeList[i].childNodes){
+        walkDown(nodeList[i].childNodes, func);
+      };
+    }
+  }
+
+  walkDown(nodes, function(node){
+    if (node.classList.contains(className)) {
+      output.push(node);
+    }
+  });
+
+  return output;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
